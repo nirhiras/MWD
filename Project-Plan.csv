@@ -1,0 +1,44 @@
+ID,Task Name,Phase,Duration (days),Predecessors,Resource Names,Deliverable,Success Criteria
+1,Program kickoff and governance charter,Phase 0 - Foundation (Month 1),5,,"CISO, Cybersecurity Manager",Signed program charter and RACI,Charter approved by executive sponsor
+2,MDR/24x7 SOC augmentation - procurement,Phase 0 - Foundation (Month 1),10,1,"CISO",Signed MDR contract (Falcon Complete/OverWatch),Contract executed; onboarding scheduled
+3,MDR onboarding and integration with CrowdStrike/QRadar,Phase 0 - Foundation (Month 1),10,2,"Cybersecurity Manager, Threat Analysts",24x7 monitoring live,MDR provider actively triaging alerts
+4,Backup immutability assessment and remediation,Phase 0 - Foundation (Month 1),10,1,"Network Specialist",Immutable/air-gapped backup confirmed for Tier-1 systems,Object-lock or air-gap verified on backup repository
+5,Security awareness training platform deployment,Phase 0 - Foundation (Month 1),10,1,"GRC Consultants",Awareness platform live org-wide,100% of users enrolled; first phishing simulation scheduled
+6,OT/ICS security vendor assessment (Claroty/Dragos/Nozomi),Phase 0 - Foundation (Month 1),15,1,"CISO, Network Specialist",Vendor shortlist and selection,Vendor selected; SOW drafted
+7,Confirm M365 E5/Entra ID P2 licensing,Phase 0 - Foundation (Month 1),5,1,"Cybersecurity Manager",Licensing confirmation memo,Licensing gaps identified and remediated
+8,Enforce phishing-resistant MFA for privileged accounts,Phase 0 - Foundation (Month 1),10,7,"Cybersecurity Manager",MFA enforced for all privileged accounts,100% privileged account MFA coverage
+9,Advanced email security pilot (Proofpoint/Mimecast/Abnormal),Phase 1 - Identity and Data Protection (Months 2-3),15,3,"Network Specialist",Email security pilot live for high-risk mailboxes,Pilot mailboxes protected; false-positive rate acceptable
+10,DLP policy design (Microsoft Purview),Phase 1 - Identity and Data Protection (Months 2-3),15,7,"GRC Consultants, Cybersecurity Manager",DLP policy draft,Policy reviewed and approved by data owners
+11,Secrets management pilot (Vault/CyberArk Conjur),Phase 1 - Identity and Data Protection (Months 2-3),15,8,"Network Specialist",Secrets vaulting pilot for top 10 applications,Pilot applications no longer use hardcoded credentials
+12,Advanced email security full rollout,Phase 1 - Identity and Data Protection (Months 2-3),10,9,"Network Specialist",Email security live org-wide,100% mailbox coverage
+13,DLP policy rollout,Phase 1 - Identity and Data Protection (Months 2-3),15,10,"Cybersecurity Manager",DLP enforced across email/SharePoint/Teams/endpoint,DLP incidents logged and triaged in SIEM
+14,PAM depth enhancement (JIT, session recording),Phase 1 - Identity and Data Protection (Months 2-3),20,8,"Cybersecurity Manager",Enhanced PAM configuration live,100% privileged sessions recorded
+15,Vulnerability management platform deployment (Tenable/Rapid7),Phase 1 - Identity and Data Protection (Months 2-3),15,7,"Cybersecurity Manager, Network Specialist",VM platform deployed and scanning,Full IT asset scan coverage achieved
+16,Vulnerability management SLA policy finalization,Phase 1 - Identity and Data Protection (Months 2-3),10,15,"CISO, GRC Consultants",Signed VM SLA policy,Policy signed by executive leadership
+17,First full vulnerability baseline report,Phase 1 - Identity and Data Protection (Months 2-3),5,15,"Cybersecurity Manager",Baseline vulnerability report,Report delivered to CISO
+18,SOAR platform deployment (Cortex XSOAR/QRadar SOAR),Phase 2 - Detection and Response Maturity (Months 4-6),20,3,"Threat Analysts, Cybersecurity Manager",SOAR live and integrated with QRadar,SOAR ingesting SIEM alerts
+19,SOAR playbook development (phishing/isolation/IOC blocklist),Phase 2 - Detection and Response Maturity (Months 4-6),15,18,"Threat Analysts",3 production playbooks,Playbooks handling live Tier-1 alerts
+20,Threat intelligence platform integration (WaterISAC + commercial feed),Phase 2 - Detection and Response Maturity (Months 4-6),15,18,"Threat Analysts",TIP integrated into QRadar/SOAR,IOC feed actively enriching alerts
+21,CASB/SSPM deployment,Phase 2 - Detection and Response Maturity (Months 4-6),15,13,"Network Specialist",SaaS posture monitoring live,Baseline SaaS posture report delivered
+22,Attack surface management tool deployment,Phase 2 - Detection and Response Maturity (Months 4-6),10,6,"Network Specialist",External ASM baseline established,Baseline external exposure report delivered
+23,DLP rollout completion beyond pilot,Phase 2 - Detection and Response Maturity (Months 4-6),10,13,"Cybersecurity Manager",DLP fully enforced org-wide,All defined data categories covered
+24,IR plan and runbook formalization,Phase 2 - Detection and Response Maturity (Months 4-6),15,1,"CISO, Cybersecurity Manager",Signed IR plan and runbooks,IR plan approved by executive leadership
+25,Retained DFIR firm contract,Phase 2 - Detection and Response Maturity (Months 4-6),15,24,"CISO",Signed DFIR retainer contract,Retainer active and contacts documented
+26,First tabletop exercise (ransomware scenario),Phase 2 - Detection and Response Maturity (Months 4-6),5,24,"CISO, Cybersecurity Manager, Threat Analysts",Tabletop after-action report,Findings documented and remediation tracked
+27,OT/ICS monitoring platform deployment - wave 1 sites,Phase 3 - Cloud and OT Security (Months 7-9),25,6,"Network Specialist, Threat Analysts",OT monitoring live at wave 1 facilities,OT asset inventory v1 delivered
+28,OT/ICS alert integration into QRadar,Phase 3 - Cloud and OT Security (Months 7-9),10,27,"Threat Analysts",OT alerts visible in SIEM,OT alerts triaged through existing SOC workflow
+29,IT/OT segmentation project (Panorama/ISE boundary enforcement),Phase 3 - Cloud and OT Security (Months 7-9),25,27,"Network Specialist, CISO",Segmentation implemented at wave 1 sites,No direct OT-to-internet paths; segmentation validated
+30,Vendor remote access brokered through PAM,Phase 3 - Cloud and OT Security (Months 7-9),10,29,"Network Specialist",Vendor remote access policy enforced,No standing VPN credentials for OT vendors
+31,CNAPP/CSPM deployment,Phase 3 - Cloud and OT Security (Months 7-9),15,21,"Network Specialist",Cloud posture baseline established,Misconfigurations tracked and remediated
+32,PKI/certificate lifecycle management deployment,Phase 3 - Cloud and OT Security (Months 7-9),15,1,"Network Specialist",Certificate inventory and expiry alerting live,Zero unplanned cert-expiry outages
+33,Purple team exercise,Phase 3 - Cloud and OT Security (Months 7-9),10,19,"CISO, Threat Analysts",Purple team after-action report,Detection gaps identified and remediated
+34,NIST 800-53 control validation cycle,Phase 4 - Optimization and Assurance (Months 10-12),15,17,"GRC Consultants",Control validation report,Residual gap list produced
+35,CIS Controls self-assessment,Phase 4 - Optimization and Assurance (Months 10-12),15,34,"GRC Consultants",CIS self-assessment report,Assessment scored and documented
+36,Quarterly access recertification,Phase 4 - Optimization and Assurance (Months 10-12),10,14,"GRC Consultants",Access recertification sign-off,All privileged/sensitive-data roles recertified
+37,External penetration test (IT and OT scope),Phase 4 - Optimization and Assurance (Months 10-12),15,29,"CISO, external pen-test firm",Penetration test report,Findings tracked to remediation
+38,Full-scale DR test including immutable backup restore,Phase 4 - Optimization and Assurance (Months 10-12),10,4,"Network Specialist, Cybersecurity Manager",DR test after-action report,Successful full recovery within RTO/RPO targets
+39,AWIA re-certification readiness check,Phase 4 - Optimization and Assurance (Months 10-12),10,34,"GRC Consultants",Readiness assessment memo,Gaps closed prior to re-certification window
+40,Security program maturity review,Phase 4 - Optimization and Assurance (Months 10-12),10,37,"CISO",Program maturity report,Maturity score improvement documented vs. baseline
+41,Policy review and refresh (all security policies),Phase 4 - Optimization and Assurance (Months 10-12),10,34,"GRC Consultants",Updated policy set,All policies reviewed within 12 months
+42,Board/executive annual report,Phase 4 - Optimization and Assurance (Months 10-12),5,40,"CISO",Annual report presented to leadership/board,Report delivered and accepted
+43,Year 2 roadmap draft,Phase 4 - Optimization and Assurance (Months 10-12),10,40,"CISO",Year 2 roadmap document,Roadmap approved by executive sponsor
