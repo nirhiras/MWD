@@ -205,6 +205,20 @@ Design principles: **Zero Trust**, **Defense in Depth**, **Least Privilege**, **
 - Immutable backup storage (e.g., object-lock enabled repository) explicitly scoped as ransomware recovery insurance.
 - Quarterly restore testing with results reported as a KPI (Section 8) and validated in tabletop/DR exercises (Section 5).
 
+### 3.13 Shadow IT / Shadow AI Discovery & Governance
+
+No third-party AI tools are currently approved (see the companion **Acceptable-Use-Policy.md**, Section 4), which makes discovery of unauthorized SaaS and AI tool usage — "Shadow IT" broadly, "Shadow AI" specifically — a first-class monitoring workstream rather than an afterthought bolted onto CASB deployment. Detection is layered across every control point already in the stack so no single tool has to catch everything:
+
+- **DNS/web layer (Cisco Umbrella + Palo Alto Panorama)**: enable the "Artificial Intelligence and Machine Learning" / "Generative AI" URL/App-ID categories already published by both vendors; route matches into QRadar as a dedicated Shadow AI log source. Run in **log-only mode** for the first 30–60 days to build an accurate inventory of what's actually in use before any enforcement decision, then move to block-with-coaching (a redirect page explaining the AUP and the request-an-exception path) for anything not on the Approved AI Tools Registry.
+- **CASB/SSPM (Section 4, Item 7)**: modern CASBs (Microsoft Defender for Cloud Apps, Netskope) ship a maintained "Generative AI" app-risk category covering hundreds of catalogued tools out of the box — this is the primary, lowest-effort engine for both discovery and policy enforcement (block, warn, or require step-up justification per app risk tier) and should be scoped to cover AI tools explicitly, not just generic SaaS, when it is deployed.
+- **Identity/OAuth layer (Entra ID)**: review Entra ID's Cloud App Discovery / enterprise app consent reports for OAuth grants to AI tools signing in via "Sign in with Microsoft" — a common shadow-AI vector that bypasses network controls entirely. Restrict user consent to admin-approved apps only so a new AI tool cannot silently obtain a standing OAuth grant to mailbox/file data.
+- **Endpoint layer (Tanium + CrowdStrike)**: maintain Tanium's software inventory as the source of truth for installed AI copilots/plugins (IDE assistants, desktop AI apps, local LLM runtimes such as Ollama/LM Studio) and enterprise-managed browser policy (Chrome/Edge extension allowlisting) to block installation of unauthorized AI browser extensions; use CrowdStrike process telemetry to flag execution of local LLM binaries that never touch the network.
+- **DLP layer (Microsoft Purview DLP)**: scope policies specifically to "paste/upload to browser" actions carrying sensitive-data classifications (PII, OT/SCADA design data, credentials) directed at unrecognized or AI-categorized domains — this catches data exfiltration into an AI prompt even on a personal device or an AI tool that evades network-layer blocking.
+- **Financial/procurement layer**: quarterly expense-report and corporate-card review (GRC Consultants) for individually expensed AI subscriptions (a classic Shadow IT tell) that never went through procurement or security review.
+- **Human layer**: an anonymous reporting channel, a Shadow AI-specific module in the security awareness program (Section 4, Item 13), and quarterly manager attestation ("what tools does your team actually use") surface tools no technical control catches on its own.
+
+Findings feed the risk register (GRC-owned) and the security metrics package (Section 8) as a standing KPI, and any tool an employee wants to keep using goes through the AI Tool Exception process defined in the Acceptable Use Policy rather than staying invisible.
+
 ---
 
 ## 4. Missing Products & Licensing Recommendations
@@ -219,7 +233,7 @@ Only genuinely missing capabilities are listed — nothing here duplicates exist
 | 4 | SOAR | Palo Alto Cortex XSOAR, IBM QRadar SOAR | Automate Tier-1 triage/response playbooks | Multiplies analyst capacity; enables consistent IR execution | **High** | Per-analyst/user annual subscription | Phase 2 (Months 4–5) |
 | 5 | Advanced Email Security | Proofpoint, Mimecast, Abnormal Security | Anti-phishing/BEC/impersonation protection layered on M365 | #1 initial-access vector not adequately covered natively | **High** | Per-mailbox annual subscription | Phase 1 (Months 2–3) |
 | 6 | DLP | Microsoft Purview DLP (leverages existing M365 E5 if licensed) | Prevent exfiltration of PII/OT design data | No enterprise DLP today | **High** | Included in M365 E5 or add-on per-user | Phase 1 (Months 2–3) |
-| 7 | CASB / SSPM | Microsoft Defender for Cloud Apps, Netskope | SaaS posture monitoring, shadow IT discovery | No SaaS security visibility today | **High** | Per-user annual subscription | Phase 2 (Months 4–5) |
+| 7 | CASB / SSPM | Microsoft Defender for Cloud Apps, Netskope | SaaS posture monitoring, shadow IT **and shadow AI/generative-AI tool** discovery (Section 3.13) | No SaaS or shadow-AI visibility today; no AI tools are currently approved for use | **High** | Per-user annual subscription | Phase 2 (Months 4–5) |
 | 8 | CNAPP / CSPM | Microsoft Defender for Cloud, Wiz, Prisma Cloud | Cloud misconfiguration & workload protection | No cloud posture tool today | **Medium-High** | Per-workload/resource annual subscription | Phase 3 (Months 7–8) |
 | 9 | Threat Intelligence Platform | Recorded Future, Anomali, WaterISAC feed integration | Structured, sector-relevant threat intel curation | Currently ad hoc; sector-specific intel (WaterISAC) underused | **Medium-High** | Per-analyst annual subscription | Phase 2 (Months 4–5) |
 | 10 | Attack Surface Management | CyCognito, IBM Randori, Censys | Continuous external attack surface discovery | No outside-in visibility today | **Medium** | Flat annual subscription | Phase 2 (Months 5–6) |
@@ -260,6 +274,7 @@ Only genuinely missing capabilities are listed — nothing here duplicates exist
 | Backup job success/failure verification | Network Specialist |
 | Incident review & retrospective (open/closed incidents) | Cybersecurity Manager |
 | PAM vault health check (stale accounts, rotation failures) | Cybersecurity Manager |
+| Shadow IT/Shadow AI discovery review (DNS/CASB/Entra ID OAuth logs, Section 3.13) | Network Specialist + Cybersecurity Manager |
 
 ### 5.3 Monthly Activities
 
@@ -399,6 +414,7 @@ The existing IR playbook is not static: it is reviewed and updated on a confirme
 | OT/ICS Asset Inventory Completeness | Trending to 100% of known facilities | Quarterly (during rollout) |
 | SOAR Playbook Automation Rate | % of Tier-1 alerts auto-triaged | Monthly (post-deployment) |
 | IR Playbook Currency | ≤ 365 days since last full review; quarterly check-in completed each quarter | Quarterly |
+| Shadow IT/Shadow AI Discoveries (count, trend) | Downward trend in unremediated findings; each finding closed via block, approval, or Approved AI Tools Registry addition | Monthly |
 
 ---
 
@@ -541,3 +557,10 @@ The incremental headcount below is not required to execute this roadmap, but wou
 - Optionally, 1 OT-SIEM Integration Engineer (or a confirmed liaison/SLA model with whichever team already operates the OT monitoring tooling) to own that integration long-term rather than as a one-time project
 
 Treat this list as a Year 2 hiring conversation once the Year 1 gaps above (vulnerability management program, OT-SIEM integration, SOAR, IR playbook governance) are closed with the existing team.
+
+---
+
+## Companion Documents
+
+- **`Project-Plan.csv`** / **`Project-Plan-Gantt.xlsx`** — task-level project plan (Section 10).
+- **`Acceptable-Use-Policy.md`** — the employee-facing policy governing general system use and, in particular, unauthorized ("shadow") AI tool usage (Section 3.13 covers the technical monitoring side of the same problem).
