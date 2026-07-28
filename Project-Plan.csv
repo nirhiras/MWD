@@ -12,7 +12,7 @@ ID,Task Name,Phase,Duration (days),Predecessors,Resource Names,Deliverable,Succe
 11,Secrets management pilot (Vault/CyberArk Conjur),Phase 1 - Identity and Data Protection (Months 2-3),15,8,"Network Specialist",Secrets vaulting pilot for top 10 applications,Pilot applications no longer use hardcoded credentials
 12,Advanced email security full rollout,Phase 1 - Identity and Data Protection (Months 2-3),10,9,"Network Specialist",Email security live org-wide,100% mailbox coverage
 13,DLP policy rollout,Phase 1 - Identity and Data Protection (Months 2-3),15,10,"Cybersecurity Manager",DLP enforced across email/SharePoint/Teams/endpoint,DLP incidents logged and triaged in SIEM
-14,PAM depth enhancement (JIT, session recording),Phase 1 - Identity and Data Protection (Months 2-3),20,8,"Cybersecurity Manager",Enhanced PAM configuration live,100% privileged sessions recorded
+14,"PAM depth enhancement (JIT, session recording)",Phase 1 - Identity and Data Protection (Months 2-3),20,8,"Cybersecurity Manager",Enhanced PAM configuration live,100% privileged sessions recorded
 15,Vulnerability management platform deployment (Tenable/Rapid7),Phase 1 - Identity and Data Protection (Months 2-3),15,7,"Cybersecurity Manager, Network Specialist",VM platform deployed and scanning,Full IT asset scan coverage achieved
 16,Vulnerability management SLA policy finalization,Phase 1 - Identity and Data Protection (Months 2-3),10,15,"CISO, GRC Consultants",Signed VM SLA policy,Policy signed by executive leadership
 17,First full vulnerability baseline report,Phase 1 - Identity and Data Protection (Months 2-3),5,15,"Cybersecurity Manager",Baseline vulnerability report,Report delivered to CISO

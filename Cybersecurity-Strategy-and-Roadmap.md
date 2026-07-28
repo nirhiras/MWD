@@ -477,11 +477,11 @@ Only genuinely missing capabilities are listed — nothing here duplicates exist
 
 ## 10. Project Plan
 
-The full task-level project plan (phases, milestones, durations, predecessors, resource assignments, deliverables, and success criteria) is provided as a companion file formatted for direct import into Microsoft Project or Excel:
+The full task-level project plan (phases, milestones, durations, predecessors, resource assignments, deliverables, and success criteria) is provided as two companion files:
 
-**`Project-Plan.csv`** (in this repository)
-
-Import notes for Microsoft Project: File → Open → select CSV → map columns (Task Name, Duration, Predecessors, Resource Names) → set the project **Start Date** to the actual kickoff date; MS Project will auto-schedule all successor tasks from the Predecessors column. In Excel, the file opens directly as a formatted task table and can be used as-is for tracking or converted to a Gantt view with the built-in "Conditional Formatting → Data Bars" against the Duration column.
+- **`Project-Plan.csv`** — plain task table for direct import into Microsoft Project. File → Open → select CSV → map columns (Task Name, Duration, Predecessors, Resource Names) → set the project **Start Date** to the actual kickoff date; MS Project will auto-schedule all successor tasks from the Predecessors column.
+- **`Project-Plan-Gantt.xlsx`** — a formatted, self-calculating Gantt chart workbook for Excel. Start/Finish dates are computed with `WORKDAY()` from a single editable **Project Start Date** cell (`G2`) and each task's predecessor; a phase-gate rule additionally holds that no task in a later phase starts until every task in the prior phase has finished, since the same ~9-person team executes every phase. Task bars are shaded by phase (color-coded legend at the top) across monthly columns using conditional formatting. Edit `G2` to reschedule the entire plan — every date and bar recalculates automatically.
+  - Note: at the durations given, the critical-path schedule converges in roughly 8–9 months rather than exactly 12, because it models task effort and dependencies only (no holiday or procurement/contracting lead-time buffer between phases). Treat Section 9's month-by-month narrative above as the governance/reporting calendar, and this workbook as the underlying technical schedule; add buffer to task durations if a strict 12-month pace should be enforced.
 
 ---
 
